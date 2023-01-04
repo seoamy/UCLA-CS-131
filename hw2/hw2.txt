@@ -1,0 +1,51 @@
+Writing make_matcher and make_parser:
+
+I decided to write make_parser in terms of make_matcher because of the 
+similarities in their functionality. Since I had already created make_matcher
+first, I was able to reuse basically all of my code within 
+make_parser. I did not explicitly call make_matcher in
+make_parser because there were slight difference in what needed to be done, 
+so I basically copy and pasted the functions and changed a few 
+things to make it work. There could have probably been a cleaner way to do
+this to avoid duplicated code, but both functions had different things to 
+keep track of, such as the path which is only needed in the parser, so I 
+did not try to make one helper function that could be used in both 
+make_parser and make_matcher.
+
+Both make_matcher and the first part of make_parser use many recursive helper
+functions to traverse the grammar rules. These functions traverse the rules
+until a terminal symbol is hit, which is when we would check if the fragment
+matches. If the rule was nonterminal, we had to generate a new acceptor
+based on the previous one and call the overall function again on these
+next layer of rules until something terminal is found.
+
+make_parser has additional functionality in that it generates a tree after
+traversing the grammar rules. I created a few recursive helper functions that
+generated all the children nodes and whenever a terminal symbol was found,
+it was concatenated to the other nodes in its layer.
+
+
+Weaknesses:
+
+There are many weaknesses in my implementations of make_matcher and 
+make_parser because it would not be able to match and parse all types of 
+grammars. In particular, it would be able to go into an infinite loop if 
+given a recursive grammar. My functions are very naive in that it was geared 
+more towards the example test cases and not all types of general grammars.
+An example of a recursive grammar that would cause my code to fail is:
+
+nonterminals: Noun, Verb, Adj
+with rules: Noun -> N Verb; N Adj
+            Verb -> N Adj
+            Adj -> N Verb
+
+This grammar would cause my functions to go into an infinite loop since
+it'll keep checking the rules for Verb and Adj over and over again since
+they depend on each other and will never reach a terminal rule, which shows
+the weaknesses in my matcher and parsing functions. My matcher and parser
+functions were written in a way that is easy to parse grammar rules that
+are linear, in that the first rule to match would be the right to match.
+Because once it finds a match, it keeps moving onto the next term instead
+of checking possibly better matches that can lead to better performance
+and accurate matches.
+

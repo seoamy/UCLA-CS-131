@@ -1,0 +1,12 @@
+1. I used pattern matching since we learned it in class; this was my first approach.
+A possible weakness is performance asthere may be faster implementations.
+2. I used the math definition of equal sets and the previous function; this was my first approach.
+3. Same approach, reasoning, and weakness as 1.
+4. Same approach, reasoning, and weakness as 1.
+6. I used the math definition of fixed point and created a recursive function; this was my first approach. A possible weakness is performance due to the amount of recursive calls that are necessary 
+to find the fixed point/realize there is none.
+7. Same approach, reasoning, and weakness as 6.
+8. I used the given base case & recursively called the function while appending x; this was my first approach. A possible weakness is performance due to the recursive calls.
+9. I used a bottom-up approach to this problem by thinking of terminal rules as a set. I thought of doing recursive pattern matching with subsets (almost like a DFS until I reached a rule that was T), but failed because I didn't know when to stop reursing so then I realized I could use computed_fixed_point to handle this problem. Then I broke the problem down into its simplest case: 
+checking if a rule is terminal. I expanded this to check if a list of rules and eventually a grammar
+is terminal. I had difficulty pattern matching because of the grammar format. I had to reformat the x input as a tuple for computed_fixed_point, which resulted in needing a separate wrapper function. A possible weakness is that there's a lot of repetitive recursion going on in these functions that affects performance.

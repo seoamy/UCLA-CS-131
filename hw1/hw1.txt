@@ -1,0 +1,9 @@
+1. used pattern matching since we learned it in class, possible weakness is performance -- there may be faster implementations
+2. used math definition of equal sets with previous function
+3, 4. same as 1
+6. used math definition of fixed point, possible weakness is memory & time
+7. same as 6
+8. used given base case & recursively called the function while appending x, possible weakness is performance
+9. I approached this problem by thinking of terminal rules as a set. I thought of doing recursive pattern matching with subsets, but failed because I didn't know when to stop recursing so then I used computed_fixed_point & broke the problem down into its simplest case: 
+checking if a rule is terminal. Then I expanded this to a list of rules and a grammar.
+I had difficulty pattern matching; had to reformat x input as a tuple for computed_fixed_point, which resulted in needing a wrapper function. There's a lot of repetitive recursion going on in these functions that affect performance.
